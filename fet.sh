@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 WM=${WAYLAND_DISPLAY:-$(xprop -id "$(xprop -root _NET_SUPPORTING_WM_CHECK | cut -d' ' -f5)" _NET_WM_NAME | cut -d'"' -f2)}
 echo -e "------------OS VER------------"
-grep -m1 -o '[^NAME=]' '/etc/os-release' | cut -d '"' -f 2 | tr -d '\012\015' && printf "\n"
+awk -F= '/^PRETTY_NAME=/{print $2}' /etc/os-release | tr -d '"'
 echo -e "------------KERNEL------------"
 uname -r
 echo -e "-------------DE/WM-------------"
